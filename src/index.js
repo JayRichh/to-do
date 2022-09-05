@@ -219,5 +219,5 @@ class toDo {
     }
   }
 }
-
+// Initialize the app
 toDo.init();
