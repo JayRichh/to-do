@@ -209,13 +209,9 @@ class toDo {
   }
 
   static checkStorage() {
-    if (localStorage.getItem("tasks") === null) {
-      return;
-    } else {
-      const tasks = JSON.parse(localStorage.getItem("tasks"));
-      tasks.forEach((task) => {
-        this.tasks.push(task);
-      });
+    if (localStorage.getItem("tasks") !== null) {
+      const tasks = localStorage.getItem("tasks");
+      this.tasks = JSON.parse(tasks);
     }
   }
 }
