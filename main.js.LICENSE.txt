@@ -1,0 +1,1 @@
+//! filter out the task that is being deleted from the tasks array and reassign the tasks array to the new array
