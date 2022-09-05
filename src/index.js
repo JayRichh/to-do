@@ -29,7 +29,8 @@ class toDo {
     return JSON.stringify(this.tasks);
   }
 
-  set taskDeserialize(taskString) { // Set the tasks from local storage to the tasks array
+  set taskDeserialize(taskString) {
+    // Set the tasks from local storage to the tasks array
     this.tasks = JSON.parse(localStorage.getItem("tasks"));
   }
 
@@ -55,7 +56,9 @@ class toDo {
     this.bindTaskEvents();
     // store the tasks in local storage
     localStorage.setItem("tasks", this.taskSerialize);
-    console.log(this.tasks);
+
+    //console log tasks in local storage
+    console.log(localStorage.getItem("tasks"));
   }
 
   addTask(task) {
@@ -162,7 +165,7 @@ class toDo {
   bindGlobalEvents() {
     addButton?.addEventListener("click", (e) => {
       e.preventDefault();
-      this.renderTitleInput(); 
+      this.renderTitleInput();
       this.toggleModal();
       console.log("clicked");
     });
@@ -209,9 +212,12 @@ class toDo {
   }
 
   static checkStorage() {
-    if (localStorage.getItem("tasks") !== null) { // Check if there are any tasks in local storage
-      const tasks = localStorage.getItem("tasks");
-      taskDeserialize(tasks);
+    if (localStorage.getItem("tasks") !== null) {
+      // Check if there are any tasks in local storage
+      const tasks = JSON.parse(localStorage.getItem("tasks")); // Get the tasks from local storage
+      tasks.forEach((task) => {
+        this.addTask(task); // Add the tasks to the array
+      });
     }
   }
 }
