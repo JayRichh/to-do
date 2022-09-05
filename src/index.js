@@ -209,9 +209,9 @@ class toDo {
   }
 
   static checkStorage() {
-    if (localStorage.getItem("tasks") !== null) {
+    if (localStorage.getItem("tasks") !== null) { // Check if there are any tasks in local storage
       const tasks = localStorage.getItem("tasks");
-      this.tasks = JSON.parse(tasks);
+      taskDeserialize(tasks);
     }
   }
 }
