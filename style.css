@@ -1,0 +1,301 @@
+html {
+  font-size: 62.5%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: rgb(0, 0, 0);
+  z-index: 100;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
+}
+header h1 {
+  font-size: 3rem;
+  text-align: center;
+  font-variant: small-caps;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  line-height: 60px;
+  color: rgb(255, 255, 255);
+}
+main {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
+  position: relative;
+  top: 60px;
+  padding: 30px 60px;
+  margin: 0 auto;
+  max-width: 1200px;
+  min-width: 600px;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  z-index: 100;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+footer p {
+  font-size: 1.4rem;
+  text-align: center;
+  line-height: 40px;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+.task-modal {
+  z-index: 1;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+.task-modal.active {
+  visibility: visible;
+}
+.task-modal-content {
+  display: none;
+  z-index: 2;
+  position: relative;
+  background-color: #fff;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 3rem;
+  cursor: pointer;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+form.add-task-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  border-radius: 5px;
+  width: auto;
+  height: auto;
+  border: 3px solid rgba(0, 0, 0, 0.10);
+  margin-bottom: 50px;
+}
+form.add-task-form  label {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+form.add-task-form  input {
+  font-size: 1.6rem;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 5px;
+  margin: 10px;
+  width: 100%;
+}
+form.add-task-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+form.add-task-form button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+form.add-task-form button:active {
+  background-color: rgba(0, 0, 0, 0.3);
+  transform: scale(0.95);
+}
+form:not(.add-task-form) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form label {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+form input {
+  font-size: 1.6rem;
+  padding: 10px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+form input:focus {
+  outline: none;
+  border: 1px solid #333;
+}
+form select {
+  font-size: 1.6rem;
+  padding: 10px 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+form button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+form button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+form button:active {
+  background-color: rgba(0, 0, 0, 0.3);
+  transform: scale(0.95);
+}
+.todos {
+  width: 100%;
+  display: grid;
+  grid: repeat(3, 1fr) / repeat(3, 1fr);
+  grid-gap: 20px;
+  justify-items: center;
+  align-items: center;
+  background-color: #aaa;
+  box-sizing: border-box;
+}
+.todos > * {
+  width: 100%;
+  height: 100%;
+  min-width: 300px;
+  min-height: 300px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: rgb(131, 136, 127);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  fill: #fff;
+  transform: scale(1);
+}
+.todos > *:hover {
+  transform: scale(1.05);
+}
+.todos > *:active {
+  transform: scale(0.95);
+}
+.todos > *.delete-animation {
+  transition: all 0.6s ease-in-out;
+  transform: scale(0);
+}
+.todos h3 {
+  font-size: 3rem;
+  font-variant: small-caps;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+.todos p {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+.todos button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin: 0 2rem;
+}
+.todos button:hover {
+  transform: scale(1.05);
+}
+.todos button:active {
+  transform: scale(0.95);
+}
+.todos button.delete {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+.todos button.delete:hover {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+.todos button.delete:active {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+.todos button.edit {
+  background-color: rgba(0, 0, 255, 0.1);
+}
+.todos button.edit:hover {
+  background-color: rgba(0, 0, 255, 0.2);
+}
+.todos button.edit:active {
+  background-color: rgba(0, 0, 255, 0.3);
+}
+@media screen and (max-width: 1200px) {
+  .todos {
+    grid: repeat(2, 1fr) / repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 800px) {
+  .todos {
+    grid: repeat(1, 1fr) / repeat(1, 1fr);
+  }
+}
