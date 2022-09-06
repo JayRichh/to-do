@@ -29,12 +29,6 @@ class toDo {
     return JSON.stringify(this.tasks);
   }
 
-  set taskStorage(tasks) {
-    this.tasks = JSON.parse(tasks);
-
-    this.displayToDoList();
-  }
-
   displayToDoList() {
     todos.innerHTML = "";
     this.tasks.forEach((task) => {
@@ -189,9 +183,14 @@ class toDo {
     toDo.displayToDoList();
     toDo.bindGlobalEvents();
     // Check if storage is empty and if not, set the tasks array to the tasks in local storage
-    if (localStorage.getItem("tasks") !== null) {
-      const tasks = localStorage.getItem("tasks");
-      toDo.taskStorage = tasks; // Set the tasks array to the tasks in local storage
+    console.log("checking storage");
+    let storage = localStorage.getItem("tasks");
+    if (storage !== null) {
+      console.log("storage is not empty");
+      toDo.tasks = JSON.parse(storage);
+      console.log("tasks set");
+      toDo.displayToDoList();
+      console.log("displayed");
     }
     return toDo;
   }
