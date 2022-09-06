@@ -12,7 +12,7 @@ const newTaskForm = document.querySelector("#new-task");
 const addTaskButton = document.querySelector(".new-task-button");
 
 class toDo {
-  constructor(title, description, dueDate, priority, notes, checklist) {
+  constructor(title, description, dueDate, priority, notes) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -29,10 +29,11 @@ class toDo {
     return JSON.stringify(this.tasks);
   }
 
-  set taskDeserialize(taskString) {
-    // Set the tasks from local storage to the tasks array
-    this.tasks = JSON.parse(localStorage.getItem("tasks"));
+  set taskStorage(tasks) {
+    this.tasks = JSON.parse(tasks);
+    this.displayToDoList();
   }
+
 
   displayToDoList() {
     todos.innerHTML = "";
@@ -54,11 +55,8 @@ class toDo {
       todos.appendChild(taskDiv);
     });
     this.bindTaskEvents();
-    // store the tasks in local storage
-    localStorage.setItem("tasks", this.taskSerialize);
 
-    //console log tasks in local storage
-    console.log(localStorage.getItem("tasks"));
+    localStorage.setItem("tasks", this.taskSerialize); // Save the tasks to local storage via the setter
   }
 
   addTask(task) {
@@ -188,10 +186,12 @@ class toDo {
 
   static init() {
     const toDo = new this();
-    this.checkStorage();
     toDo.displayToDoList();
     toDo.bindGlobalEvents();
-
+    // Check if storage is empty and if not, set the tasks array to the tasks in local storage
+    if (localStorage.getItem("tasks") !== null) { 
+      toDo.taskStorage = localStorage.getItem("tasks"); // Set the tasks array to the tasks in local storage via the setter = 
+    }
     return toDo;
   }
 
@@ -209,16 +209,6 @@ class toDo {
       notes,
     };
     return task;
-  }
-
-  static checkStorage() {
-    if (localStorage.getItem("tasks") !== null) {
-      // Check if there are any tasks in local storage
-      const tasks = JSON.parse(localStorage.getItem("tasks")); // Get the tasks from local storage
-      tasks.forEach((task) => {
-        this.addTask(task); // Add the tasks to the array
-      });
-    }
   }
 }
 // Initialize the app
