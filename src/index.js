@@ -182,6 +182,10 @@ class toDo {
     const toDo = new this();
     toDo.displayToDoList();
     toDo.bindGlobalEvents();
+
+    // Check if storage is empty and if not, set the tasks array to the tasks in local storage
+    this.setStorage();
+
     return toDo;
   }
 
@@ -209,7 +213,3 @@ class toDo {
 }
 // Initialize the app
 toDo.init();
-// Check if storage is empty and if not, set the tasks array to the tasks in local storage
-console.log("tasks" + toDo.tasks);
-toDo.setStorage();
-console.log("tasks" + toDo.tasks);
