@@ -31,9 +31,9 @@ class toDo {
 
   set taskStorage(tasks) {
     this.tasks = JSON.parse(tasks);
+
     this.displayToDoList();
   }
-
 
   displayToDoList() {
     todos.innerHTML = "";
@@ -189,8 +189,9 @@ class toDo {
     toDo.displayToDoList();
     toDo.bindGlobalEvents();
     // Check if storage is empty and if not, set the tasks array to the tasks in local storage
-    if (localStorage.getItem("tasks") !== null) { 
-      toDo.taskStorage = localStorage.getItem("tasks"); // Set the tasks array to the tasks in local storage via the setter = 
+    if (localStorage.getItem("tasks") !== null) {
+      const tasks = localStorage.getItem("tasks");
+      toDo.taskStorage = tasks; // Set the tasks array to the tasks in local storage
     }
     return toDo;
   }
