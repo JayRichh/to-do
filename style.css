@@ -3,11 +3,24 @@ html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+html * {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: #333;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
 }
+
 header {
   position: fixed;
   top: 0;
@@ -16,7 +29,33 @@ header {
   height: 60px;
   background-color: rgb(0, 0, 0);
   z-index: 100;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
+}
+header .logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  z-index: 100;
+}
+header .github {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  z-index: 100;
+}
+header img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  z-index: 100;
+}
+header .github img {
+  scale: 1.75;
 }
 header h1 {
   font-size: 3rem;
@@ -29,22 +68,192 @@ header h1 {
   color: rgb(255, 255, 255);
 }
 main {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 40px;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 1.6rem;
   line-height: 1.5;
   color: #333;
-  background-color: #fff;
+  background-color: rgb(220, 220, 220);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+main > h2 {
+  position: absolute;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  top: 1em;
+  left: 1.5em;
+  letter-spacing: 0.1rem;
+}
+main > div[class="filter-container"] {
   position: relative;
-  top: 60px;
-  padding: 30px 60px;
-  margin: 0 auto;
-  max-width: 1200px;
-  min-width: 600px;
-  min-height: calc(100vh - 100px);
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 2rem;
+  gap: 5px;
+}
+main > div[class="filter-container"] > button {
+  width: 90%;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  font-size: 2rem;
+  color: rgb(50, 50, 50);
+  cursor: pointer;
+  margin: 15px;
+  text-align: left;
+  line-height: 50px;
+  border: 1px solid rgb(255, 255, 255);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
+  transition: all 0.2s ease-in-out;
+}
+main > div[class="filter-container"] > button.selected {
+  background-color: rgba(216, 235, 195, 0.76);
+}
+main > div[class="filter-container"] i {
+  padding: 0 10px;
+  scale: 1.25;
+}
+main > div[class="filter-container"] > button:hover {
+  border: 1px solid rgb(50, 50, 50);
+}
+main > div[class="filter-container"] > button:active {
+  background-color: rgb(200, 200, 200);
+  border: 1px solid rgb(50, 50, 50);
+}
+main > div[class="project-container"] {
+  position: relative;
+  grid-column: 1 / 2;
+  grid-row: 3 / 6;
+  height: 100%;
+  display: grid;
+  max-height: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 80px 1fr;
+  margin: 15px;
+}
+main > div[class="project-container"] > h2 {
+  position: relative;
+  font-weight: 500;
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  text-align: start;
+  scale: 0.9;
+  align-self: center;
+  pointer-events: none;
+}
+main > div[class="project-container"] > button {
+  position: relative;
+  place-self: center;
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
+  width: 35px;
+  height: 35px;
+  border: 2.5px solid rgb(97, 97, 97);
+  color:rgb(50, 50, 50);
+  background-color: rgb(255, 255, 255);
+  border-radius: 17.5px;
+  font-size: x-large;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
+  transition: 0.2s;
+}
+main > div[class="project-container"] > button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  scale: 1.1;
+}
+main > div[class="project-container"] > button:active {
+  background-color: rgba(0, 0, 0, 0.2);
+  scale: 1.1;
+}
+main > div[class="project-container"] > div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / 5;
+  grid-row: 2 / 3;
+  gap: 10px;
+  margin-right: 5px;
+}
+main > div[class="project-container"] > div > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  border-radius: 5px;
+  width: 100%;
+  height: 50px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
+  cursor: pointer;
+  transition: 0.2s;
+}
+main > div[class="project-container"] > div > div:hover {
+  transform: scale(1.05);
+}
+main > div[class="project-container"] > div > div:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+main > div[class="project-container"] > div > div.selected {
+  background-color: rgba(216, 235, 195, 0.76);
+}
+main > div[class="project-container"] .project-buttons {
+  gap: 5px;
+}
+main > div[class="project-container"] > div h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  line-height: 50px;
+  pointer-events: none;
+}
+main > div[class="project-container"] > div a {
+  width: 50px;
+  height: 50px;
+  padding: 5px 5px;
+}
+main > div[class="project-container"] > div a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  scale: 1.1;
+}
+main > div[class="project-container"] > div a:active {
+  color: rgb(0, 0, 0);
+}
+main > div[class="project-container"] > div i {
+  scale: 1.25;
+  color: rgb(50, 50, 50);
+}
+main > div[class="todo-container"] {
+  position: absolute;
+  grid-column: 2 / 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  min-width: 600px;
+  min-height: calc(100vh - 100px);
+  max-height: 100%;
+  background-color: rgb(236, 236, 236);
 }
 footer {
   position: fixed;
@@ -94,7 +303,7 @@ footer p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 30px;
 }
 .close {
   position: absolute;
@@ -111,39 +320,87 @@ footer p {
 }
 form.add-task-form {
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 90%;
+  height: 70px;
+  border-bottom: rgba(51, 51, 51, 0.473) 1px solid;
+  gap: 10px;
+}
+form.add-task-form div {
+  position: relative;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 20px;
-  border-radius: 5px;
-  width: auto;
-  height: auto;
-  border: 3px solid rgba(0, 0, 0, 0.10);
-  margin-bottom: 50px;
 }
-form.add-task-form  label {
+/* form.add-task-form span.active {
+  display: none;
+} */
+form.add-task-form span {
   font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-weight: 500;
+  color: rgba(51, 51, 51, 0.295);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -30px;
 }
-form.add-task-form  input {
-  font-size: 1.6rem;
-  padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.10);
-  border-radius: 5px;
-  margin: 10px;
+form.add-task-form label {
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: left;
   width: 100%;
 }
-form.add-task-form button {
+form.add-task-form input {
+  width: 600px;
   padding: 10px 20px;
+  font-size: 2rem;
   border: none;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.1);
+  outline: none;
+  background-color: white;
+}
+form.add-task-form input::placeholder {
+  color: rgba(51, 51, 51, 0.432);
+}
+form.add-task-form input:focus {
+  border-bottom: rgba(51, 51, 51, 0.473) 1px solid;
+}
+form.add-task-form div input:last-child {
+  border: 1px solid rgba(255, 255, 255, 0.473);
+  font-size: 1.5rem;
+  width: 175px;
+}
+form.add-task-form select {
   font-size: 1.6rem;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  background-color: white;
+  width: 125px;
+}
+form.add-task-form button {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  border: 2.5px solid rgb(97, 97, 97);
+  color:rgb(50, 50, 50);
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  font-size: x-large;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
+  transition: 0.2s;
+  padding: 0 10px;
+  margin: 0 20px;
+}
+form.add-task-form button.disabled {
+  border: 2.5px solid rgb(97, 97, 97);
+  color: rgb(97, 97, 97);
+  cursor: not-allowed;
 }
 form.add-task-form button:hover {
   background-color: rgba(0, 0, 0, 0.2);
@@ -158,81 +415,110 @@ form:not(.add-task-form) {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
 }
 form label {
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 10px;
+  text-align: left;
+  width: 100%;
 }
 form input {
-  font-size: 1.6rem;
+  font-size: 2rem;
   padding: 10px 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+  width: 100%;
 }
 form input:focus {
   outline: none;
-  border: 1px solid #333;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+form textarea {
+  font-size: 2rem;
+  padding: 10px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  resize: none;
+  
 }
 form select {
-  font-size: 1.6rem;
+  font-size: 2rem;
   padding: 10px 50px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+  width: 100%;
 }
-form button {
-  margin: 10px;
-  padding: 10px 20px;
-  border: none;
+form button:not(.add-task) {
+  font-size: 2rem;
+  padding: 12.5px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.1);
-  font-size: 1.6rem;
-  font-weight: bold;
-  cursor: pointer;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 20px;
 }
 form button:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(132, 216, 115, 0.781);
   transform: scale(1.05);
 }
 form button:active {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(106, 216, 73, 0.699);
   transform: scale(0.95);
 }
 .todos {
   width: 100%;
+  max-width: 1200px;
+  min-height: 600px;
   display: grid;
   grid: repeat(3, 1fr) / repeat(3, 1fr);
   grid-gap: 20px;
   justify-items: center;
   align-items: center;
-  background-color: #aaa;
   box-sizing: border-box;
+  position: relative;
+  padding: 20px;
 }
-.todos > * {
+.todos > p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 0.438);
+}
+.todos > div {
   width: 100%;
   height: 100%;
   min-width: 300px;
   min-height: 300px;
+  max-width: 400px;
+  max-height: 400px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: rgb(131, 136, 127);
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   transition: all 0.3s ease-in-out;
-  fill: #fff;
-  transform: scale(1);
+  background-color: rgb(219, 219, 219);
+}
+.todo.completed {
+  background-color: rgba(216, 235, 195, 0.76) !important;
 }
 .todos > *:hover {
-  transform: scale(1.05);
+  transform: scale(1.025);
 }
 .todos > *:active {
   transform: scale(0.95);
@@ -240,6 +526,22 @@ form button:active {
 .todos > *.delete-animation {
   transition: all 0.6s ease-in-out;
   transform: scale(0);
+}
+.todos h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 0.733);
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+.todos .task-description {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 0.884);
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
 }
 .todos h3 {
   font-size: 3rem;
@@ -249,10 +551,52 @@ form button:active {
   padding: 0;
 }
 .todos p {
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: bold;
   margin: 0;
   padding: 0;
+}
+.todos .sub-heading {
+  opacity: 0.5;
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin: 0;
+  padding-right: 10px;
+}
+.todos .todo-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.todos .todo-buttons i {
+  font-size: 3rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: #333;
+}
+.todos .todo-buttons .task-edit:hover {
+  transform: scale(1.15);
+  color: rgb(247, 204, 155);
+}
+.todos .todo-buttons .task-delete:hover {
+  transform: scale(1.15);
+  color: rgb(247, 140, 140);
+}
+.todos .todo-buttons .task-complete:hover {
+  transform: scale(1.15);
+  color: rgb(133, 240, 133);
+}
+.todos p.no-tasks {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  place-self: center;
+  grid-row: 1 / 4;
+  grid-column: 1 / 4;
+  text-align: center;
 }
 .todos button {
   padding: 10px 20px;
@@ -292,6 +636,20 @@ form button:active {
 @media screen and (max-width: 1200px) {
   .todos {
     grid: repeat(2, 1fr) / repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 1000px) {
+  .filter-container {
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-100%);
+  }
+  .project-container {
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-100%);
+  }
+  .todo-container {
+    transition: all 0.3s ease-in-out;
+    grid-column: 1 / 6 !important;
   }
 }
 @media screen and (max-width: 800px) {

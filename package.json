@@ -13,6 +13,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "@esri/calcite-components": "^1.0.0-beta.93",
     "date-fns": "^2.29.2"
   }
 }
