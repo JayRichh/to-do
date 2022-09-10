@@ -10,9 +10,22 @@ class application {
   }
 
   init() {
+    this.loadFromStorage();
     this.render();
     this.bindEvents();
     this.taskButtonDisable();
+  }
+
+  loadFromStorage() {
+    // If there are projects in storage & the project list is not empty
+    if (localStorage.getItem("projects") && this.projects.length < 1) {
+      const projects = JSON.parse(localStorage.getItem("projects"));
+      this.projects = projects;
+
+      // update the project selection
+      project.updateProjects();
+      todo.updateTasks();
+    }
   }
 
   render() {
@@ -169,7 +182,7 @@ class project extends application {
 
   static currentProject() {
     const projectDivs = document.querySelectorAll(".new-project");
-    if (projectDivs.length > 0) {
+    if (projectDivs.length > 0 && projectDivs !== undefined) {
       const selectedDiv = Array.from(projectDivs).find((div) =>
         div.classList.contains("selected")
       );
@@ -210,7 +223,11 @@ class project extends application {
 
   static displayProjects() {
     const projectContainer = document.querySelector(".project-list");
+
+    //
+
     projectContainer.innerHTML = "";
+
     for (const project of app.projects) {
       const projectDiv = document.createElement("div");
       projectDiv.classList.add("new-project");
@@ -355,7 +372,7 @@ class todo extends project {
     const taskDiv = target.parentElement.parentElement.parentElement;
     const taskIndex = taskDiv.querySelector("h2").dataset.index;
     const taskArr = project.currentProject().tasks;
-    for (let i = 0; i < taskArr.length; i++) { 
+    for (let i = 0; i < taskArr.length; i++) {
       if (taskArr[i].index == taskIndex) {
         taskArr[i].isEditing = true;
         todo.updateTasks();
@@ -687,5 +704,32 @@ class taskModal extends application {
   }
 }
 
+class storage extends application {
+  get projects() {
+    return JSON.parse(localStorage.getItem("projects"));
+  }
+  static saveProjects() {
+    const localStorage = window.localStorage;
+    //copy instance of the app.projects array
+    const projects = [...app.projects];
+    console.log(projects);
+    // Check if array is empty
+    if (projects.length === 0) {
+      setTimeout(() => {
+        console.log("No projects to save");
+      }, 2000);
+      localStorage.removeItem("projects");
+    } else {
+      // if not empty, save to local storage
+      localStorage.setItem("projects", JSON.stringify(projects));
+    }
+  }
+}
+
 const app = new application();
 app.init();
+
+// handle localstorage on page unload
+window.addEventListener("beforeunload", () => {
+  storage.saveProjects();
+});
