@@ -14,20 +14,21 @@
   * Create all elements via JavaSccript
   * Include properties for items that include at minimum title, desc, dueDate, priority.
   * To do's should have projects or separate lists of todos.
+  * Utilize localstorage to save projects/ tasks
 
 ## Scope Creep:
 
-  * CSS Animation for toggle navigation button
-  * SASS Scripting to build the CSS for the project (to tidy)
-  * Jquery, ES6 Template Literals & expressions for some of the DOM
+  * Filtering functionality for tasks based on due dates or priority
+  * Filter/ Project navigation styling for smaller resolutions
 
 ## Tools:
 
   * VSCode 
   * Linux terminal
   * Git and GitHub
-  * SASS
-  * JQUERY
   * Webpack
   * NPM
+  * Font Awesome Icons
+ 
+ Learnt a lot about classes with this one, also the importance of planning your code!
 
