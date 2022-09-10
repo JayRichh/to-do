@@ -16,7 +16,7 @@ export function initPage() {
         <img src="./resources/logo.svg" alt="logo" />
       </a>
       <h1>To Do.</h1>
-      <a href="#" class="github">
+      <a href="https://github.com/JayRichh" class="github">
         <img src="./resources/github.svg" alt="github" />
       </a>
     </header>
