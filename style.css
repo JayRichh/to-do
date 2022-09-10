@@ -1,5 +1,5 @@
 html {
-  font-size: 50%;
+  font-size: 45%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -487,7 +487,7 @@ form button:active {
   max-width: 1200px;
   min-height: 600px;
   display: grid;
-  grid: repeat(3, 1fr) / repeat(3, 1fr);
+  grid: repeat(4, 1fr) / repeat(4, 1fr);
   grid-gap: 20px;
   justify-items: center;
   align-items: center;
@@ -531,8 +531,7 @@ form button:active {
 }
 .todos h2 {
   font-size: 3rem;
-  font-weight: bold;
-  color: rgba(51, 51, 51, 0.733);
+  font-weight: bolder;
   width: 100%;
   text-align: center;
   margin: 10px 0;
@@ -545,32 +544,33 @@ form button:active {
   text-align: center;
   margin: 10px 0;
 }
-.todos h3 {
-  font-size: 3rem;
+.todos > div > h2 {
+  font-size: 4rem;
   font-variant: small-caps;
   font-weight: bold;
   margin: 0;
-  padding: 0;
+  padding: 0 10px;
 }
 .todos p {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   margin: 0;
   padding: 0;
+  color: rgba(51, 51, 51, 0.89);
 }
 .todos .sub-heading {
   opacity: 0.5;
-  font-size: 1.75rem;
-  font-weight: bold;
-  margin: 0;
-  padding-right: 10px;
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0 0 10px 0;
+  padding-right: 2rem;
 }
 .todos .todo-buttons {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 50%;
 }
 .todos .todo-buttons i {
   font-size: 3rem;
@@ -636,6 +636,11 @@ form button:active {
   background-color: rgba(0, 0, 255, 0.3);
 }
 @media screen and (max-width: 1200px) {
+  .todos {
+    grid: repeat(3, 1fr) / repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 1000px) {
   .todos {
     grid: repeat(2, 1fr) / repeat(2, 1fr);
   }
