@@ -1,5 +1,3 @@
-# to-do
-
 # Project: Scrum Application
 
 
