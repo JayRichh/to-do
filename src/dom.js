@@ -59,6 +59,9 @@ export function initPage() {
         </form>
         <div class="todos">
         </div>
+        <div class="chart-container">
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
       </div>
     </main>
     <footer>

@@ -189,11 +189,10 @@ main > div[class="project-container"] > div {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   grid-column: 1 / 5;
   gap: 10px;
   overflow-y: auto;
-  overflow-x: hidden;
-  width: 95%;
 }
 main > div[class="project-container"] > div > div {
   position: relative;
@@ -202,7 +201,7 @@ main > div[class="project-container"] > div > div {
   justify-content: space-between;
   padding: 0 15px;
   border-radius: 5px;
-  width: 100%;
+  width: 90%;
   height: 50px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.151);
@@ -257,6 +256,11 @@ main > div[class="todo-container"] {
   min-height: 100%;
   background-color: rgb(236, 236, 236);
 }
+main > .todo-container > .chart-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+} 
 footer {
   position: fixed;
   bottom: 0;
@@ -485,9 +489,9 @@ form button:active {
 .todos {
   width: 100%;
   max-width: 1200px;
-  min-height: 600px;
+  min-height: 400px;
   display: grid;
-  grid: repeat(4, 1fr) / repeat(4, 1fr);
+  grid: repeat(1, 1fr) / repeat(4, 1fr);
   grid-gap: 20px;
   justify-items: center;
   align-items: center;
@@ -505,8 +509,8 @@ form button:active {
   height: 100%;
   min-width: 250px;
   min-height: 250px;
-  max-width: 400px;
-  max-height: 400px;
+  max-width: 300px;
+  max-height: 300px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -638,7 +642,7 @@ form button:active {
 }
 @media screen and (max-width: 1200px) {
   .todos {
-    grid: repeat(3, 1fr) / repeat(3, 1fr);
+    grid: repeat(2, 1fr) / repeat(3, 1fr);
   }
 }
 @media screen and (max-width: 1000px) {

@@ -33,6 +33,7 @@ class application {
     todo.updateTasks();
     project.displayProjects();
     const modal = new taskModal();
+    // draw the graph
   }
 
   get projectForStorage() {
@@ -76,7 +77,6 @@ class application {
           todo.deleteTask(e.target);
           break;
         case "fa-solid fa-edit task-edit": // Task Edit
-          taskModal.toggle();
           todo.editTask(e.target);
           break;
         case "fa-solid fa-check-circle task-complete": // Task Complete
@@ -202,7 +202,6 @@ class project extends application {
     const newProject = new project();
     newProject.tasks = [];
     app.projects.push(newProject);
-    console.log(app.projects);
     project.updateProjects();
     app.taskButtonDisable();
     todo.updateTasks();
@@ -223,9 +222,6 @@ class project extends application {
 
   static displayProjects() {
     const projectContainer = document.querySelector(".project-list");
-
-    //
-
     projectContainer.innerHTML = "";
 
     for (const project of app.projects) {
@@ -259,6 +255,61 @@ class project extends application {
     }
   }
 
+  static editProject(target) {
+    const projectDiv = target.parentElement.parentElement.parentElement;
+    const projectIndex = project.projectIndex(projectDiv);
+    const project = app.projects[projectIndex];
+    project.editingProject = true;
+    projectDiv.innerHTML = `
+      <input type="text" class="project-edit-input" value="${project.name}">
+      <div class="project-buttons">
+        <a href="#"><i class="fa-solid fa-check project-edit"></i></a>
+        <a href="#"><i class="fa-solid fa-trash project-delete"></i></a>
+      </div>
+    `;
+    document.addEventListener("click", (e) => {
+      console.log(e.target.classList[2]);
+      switch (e.target.classList[2]) {
+        case "project-edit":
+          project.editProjectConfirm(e.target);
+          break;
+        case "project-delete":
+          project.editProjectCancel(e.target);
+          break;
+        default:
+          break;
+      }
+    });
+  }
+
+  static editProjectConfirm(target) {
+    const projectDiv = target.parentElement.parentElement.parentElement;
+    const projectIndex = projectDiv.querySelector("h2").dataset.index;
+    console.log(projectIndex);
+    const projectArr = app.projects;
+    for (let i = 0; i < app.projectListLength; i++) {
+      if (app.projects[i].index == projectIndex) {
+        app.projects[i].editingProject = false;
+        app.projects[i].name = projectDiv.querySelector(
+          ".project-edit-input"
+        ).value;
+        project.updateProjects();
+      }
+    }
+  }
+
+  static editProjectCancel(target) {
+    const projectDiv = target.parentElement.parentElement.parentElement;
+    const projectIndex = projectDiv.querySelector("h2").dataset.index;
+    const projectArr = app.projects;
+    for (let i = 0; i < app.projectListLength; i++) {
+      if (app.projects[i].index == projectIndex) {
+        app.projects[i].editingProject = false;
+        project.updateProjects();
+      }
+    }
+  }
+
   static deleteProject(target) {
     const projectDiv = target.parentElement.parentElement.parentElement;
     const projectIndex = projectDiv.querySelector("h2").dataset.index;
@@ -278,7 +329,6 @@ class project extends application {
   static selectProject(target) {
     const projectDiv = target;
     const projectIndex = projectDiv.querySelector("h2").dataset.index;
-    console.log(projectIndex);
     const projectArr = app.projects;
     for (let i = 0; i < app.projectListLength; i++) {
       if (app.projects[i].index == projectIndex) {
@@ -327,7 +377,6 @@ class todo extends project {
       dueDate = "No due date";
     }
 
-    console.log(title, dueDate, priority);
     return [title, dueDate, priority]; // return an array of the inputs
   }
 
@@ -339,10 +388,7 @@ class todo extends project {
     newTask.priority = taskInputs[2];
     newTask.description = " ";
 
-    console.log({ newTask } + " to add");
-
     let selectedProject = project.currentProject();
-    console.log(selectedProject);
     // destructuring the selected project object to get the tasks array
     const selectedProjectTasks = project.projectTasks(selectedProject);
     // push the new task to the tasks array
@@ -353,11 +399,8 @@ class todo extends project {
 
   static deleteTask(target) {
     const taskDiv = target.parentElement.parentElement.parentElement;
-    console.log(taskDiv);
     const taskIndex = taskDiv.querySelector("h2").dataset.index;
     const taskArr = project.currentProject().tasks;
-    console.log(taskArr);
-    console.log(taskIndex);
     for (let i = 0; i < taskArr.length; i++) {
       if (taskArr[i].index == taskIndex) {
         // if the task index matches the index of the task in the array, remove it
@@ -374,34 +417,66 @@ class todo extends project {
     const taskArr = project.currentProject().tasks;
     for (let i = 0; i < taskArr.length; i++) {
       if (taskArr[i].index == taskIndex) {
-        taskArr[i].isEditing = true;
-        todo.updateTasks();
+        taskArr[i].editing = true;
+
+        // get the task inputs
+        const todo = taskArr[i];
+        const title = todo.title;
+        const description = todo.description;
+        const dueDate = todo.dueDate;
+        const priority = todo.priority;
+
+        // open the taskModal
+        taskModal.toggle();
+
+        // set the taskModal inputs to the task values
+        document.getElementById("title").value = title;
+        document.getElementById("description").value = description;
+        document.getElementById("due-date").value = dueDate;
+        document.getElementById("priority").value = priority;
+
+        // event listen for the save button
+        document
+          .querySelector(".new-task-button")
+          .addEventListener("click", () => {
+            this.saveTask(target);
+          });
       }
     }
-    // get task that is being edited
-    const task = taskArr.find((task) => task.index == taskIndex);
-    // set the values of the inputs to the values of the task
-    document.getElementById("title").value = task.title;
-    document.getElementById("description").value = task.description;
-    document.getElementById("due-date").value = task.dueDate;
-    document.getElementById("priority").value = task.priority;
+  }
 
-    const saveButton = document.querySelector(".new-task-button");
-    let saveText = "Save";
-    saveButton.textContent = saveText;
+  static saveTask(target) {
+    const taskDiv = target.parentElement.parentElement.parentElement;
+    const taskIndex = taskDiv.querySelector("h2").dataset.index;
+    const taskArr = project.currentProject().tasks;
+    for (let i = 0; i < taskArr.length; i++) {
+      if (taskArr[i].index == taskIndex) {
+        taskArr[i].editing = false;
 
-    // add event listener to save button
-    saveButton.addEventListener("click", () => {
-      task.title = document.getElementById("title").value;
-      task.description = document.getElementById("description").value;
-      task.dueDate = document.getElementById("due-date").value;
-      task.priority = document.getElementById("priority").value;
-      task.isEditing = false;
-      todo.updateTasks();
-      // remove the event listener after it's been used
-      saveButton.removeEventListener("click", () => {});
-      taskModal.close();
-    });
+        // get the task inputs
+        const todo = taskArr[i];
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const dueDate = document.getElementById("due-date").value;
+        const priority = document.getElementById("priority").value;
+
+        // Check that the right task is being edited
+        if (taskArr[i].index == taskIndex) {
+          // set the task values to the task inputs
+          taskArr[i].title = title;
+          taskArr[i].description = description;
+          taskArr[i].dueDate = dueDate;
+          taskArr[i].priority = priority;
+        }
+        // update the task
+
+        // close the taskModal
+        taskModal.close();
+
+        // update the tasks
+        this.updateTasks();
+      }
+    }
   }
 
   static filterTasks(filter) {
@@ -487,7 +562,6 @@ class todo extends project {
             task.style.display = "none";
           });
           taskArr.forEach((task) => {
-            console.log(task.priority);
             if (task.priority === "High") {
               taskDivs[task.index].style.display = "flex";
             } else {
@@ -567,6 +641,9 @@ class todo extends project {
     todo.displayTasks();
     todo.updateTaskComplete();
     todo.setDefaultAllFilter();
+    // destroy graph then draw graph
+    todo.destroyGraph();
+    todo.drawGraph();
   }
 
   static updateTaskCount() {
@@ -635,6 +712,92 @@ class todo extends project {
         `;
         taskContainer.appendChild(taskDiv);
       }
+    }
+  }
+  static destroyGraph() {
+    // get the canvas element, then clear it before drawing graph
+    const ctx = document.getElementById("myChart");
+    ctx?.remove();
+
+    const canvas = document.createElement("canvas");
+    canvas.id = "myChart";
+    canvas.height = "200";
+    canvas.width = "350";
+    const graphContainer = document.querySelector(".chart-container");
+    graphContainer.appendChild(canvas);
+  }
+  // method to draw graph from the number of tasks in the current project and graph them against due dates
+  static drawGraph() {
+    console.log("drawing graph");
+
+    const ctx = document.getElementById("myChart").getContext("2d");
+
+    const selectedProject = project.currentProject();
+    const selectedProjectTasks = project.projectTasks(selectedProject);
+
+    const taskDates = [];
+    const taskCount = [];
+
+    for (let i = 0; i < selectedProjectTasks.length; i++) {
+      const task = selectedProjectTasks[i];
+      const taskDate = new Date(task.dueDate).toDateString();
+      taskDates.push(taskDate);
+    }
+
+    const uniqueDates = [...new Set(taskDates)];
+
+    for (let i = 0; i < uniqueDates.length; i++) {
+      const date = uniqueDates[i];
+      let count = 0;
+      for (let j = 0; j < taskDates.length; j++) {
+        if (date === taskDates[j]) {
+          count++;
+        }
+      }
+      taskCount.push(count);
+    }
+
+    // if there are no tasks, don't draw graph
+    if (taskCount.length === 0) {
+      return;
+    } else {
+      const myChart = new Chart(ctx, {
+        // add title 
+        type: "line",
+        data: {
+          labels: uniqueDates,
+          datasets: [
+            {
+              label: "Tasks",
+              data: taskCount,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
     }
   }
 }
