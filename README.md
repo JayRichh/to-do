@@ -1,9 +1,7 @@
-# to-do
-
-# Project: To Do App
+# Project: Scrum Application
 
 
-## Create a to do app using javascript
+## Create a workflow/ project management application using javascript
 
 [Check out a live version here](https://jayrichh.github.io/to-do/)
 
@@ -14,20 +12,23 @@
   * Create all elements via JavaSccript
   * Include properties for items that include at minimum title, desc, dueDate, priority.
   * To do's should have projects or separate lists of todos.
+  * Utilize localstorage to save projects/ tasks
 
 ## Scope Creep:
 
-  * CSS Animation for toggle navigation button
-  * SASS Scripting to build the CSS for the project (to tidy)
-  * Jquery, ES6 Template Literals & expressions for some of the DOM
+  * Filtering functionality for tasks based on due dates or priority
+  * Filter/ Project navigation styling for smaller resolutions
+  * Include Chart.js javascript library to create a SCRUM burndown chart, representing outstanding work
 
 ## Tools:
 
   * VSCode 
   * Linux terminal
   * Git and GitHub
-  * SASS
-  * JQUERY
   * Webpack
   * NPM
+  * Chart.js
+  * Font Awesome Icons
+ 
+ Learnt a lot about classes with this one, also the importance of planning your code!
 
