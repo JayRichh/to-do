@@ -18,7 +18,7 @@
 
   * Filtering functionality for tasks based on due dates or priority
   * Filter/ Project navigation styling for smaller resolutions
-  * Include Chart.js javascript library to create a SCRUM burndown chart, representing outstanding work vs dates
+  * Include Chart.js javascript library to create a SCRUM chart, representing outstanding work vs dates
 
 ## Tools:
 
