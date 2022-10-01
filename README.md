@@ -5,6 +5,8 @@
 
 [Check out a live version here](https://jayrichh.github.io/to-do/)
 
+![workflow_github](https://user-images.githubusercontent.com/18374849/193420107-43a8fed0-c770-4951-96aa-028d0e40f4c7.png)
+
 ## Overview
 
 ### Requirements:
