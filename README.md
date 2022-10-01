@@ -10,8 +10,8 @@
 ### Requirements:
 
   * Create all elements via JavaSccript
-  * Include properties for items that include at minimum title, desc, dueDate, priority.
-  * To do's should have projects or separate lists of todos.
+  * Include properties for items that include at minimum title, desc, dueDate, priority
+  * Tasks should have projects or separate lists
   * Utilize localstorage to save projects/ tasks
 
 ## Scope Creep:
