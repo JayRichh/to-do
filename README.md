@@ -1,7 +1,7 @@
-# Project: Scrum Application
+# Project: Workflow Application
 
 
-## Create a workflow/ project management application using javascript
+## Create a project management application using javascript
 
 [Check out a live version here](https://jayrichh.github.io/to-do/)
 
@@ -18,7 +18,7 @@
 
   * Filtering functionality for tasks based on due dates or priority
   * Filter/ Project navigation styling for smaller resolutions
-  * Include Chart.js javascript library to create a SCRUM burndown chart, representing outstanding work
+  * Include Chart.js javascript library to create a SCRUM burndown chart, representing outstanding work vs dates
 
 ## Tools:
 
