@@ -738,10 +738,17 @@ class todo extends project {
     const taskDates = [];
     const taskCount = [];
 
-    for (let i = 0; i < selectedProjectTasks.length; i++) {
-      const task = selectedProjectTasks[i];
-      const taskDate = new Date(task.dueDate).toDateString();
-      taskDates.push(taskDate);
+    // if selectedProjectTasks is not empty or undefined
+    if (selectedProjectTasks !== undefined && selectedProjectTasks.length > 0) {
+      // loop through the tasks and push the due date into the taskDates array
+      for (let i = 0; i < selectedProjectTasks.length; i++) {
+        const task = selectedProjectTasks[i];
+        const taskDate = new Date(task.dueDate).toDateString();
+        taskDates.push(taskDate);
+      }
+    } else {
+      // if there are no tasks, return and don't draw the graph
+      return;
     }
 
     const uniqueDates = [...new Set(taskDates)];
